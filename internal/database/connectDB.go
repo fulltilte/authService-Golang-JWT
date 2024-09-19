@@ -41,11 +41,11 @@ func init() {
     var err error
     DB, err = sql.Open("postgres", dsn)
     if err != nil {
-        log.Fatalf("Error connecting to the database: %v", err)
+        log.Fatalf("Ошибка подключения к БД: %v", err)
     }
 
     if err = DB.Ping(); err != nil {
-        log.Fatalf("Error pinging the database: %v", err)
+        log.Fatalf("Ошибка подключения к БД: %v", err)
     }
-    fmt.Println("Database connected successfully")
+    fmt.Println("Подключение к БД успешно")
 }

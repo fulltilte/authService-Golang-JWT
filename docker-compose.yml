@@ -13,6 +13,8 @@ services:
       - backand
     ports:
       - "8080:8080"
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
 
   postgres-dev:
     image: postgres:12-alpine

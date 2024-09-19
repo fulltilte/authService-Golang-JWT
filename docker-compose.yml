@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backand:
+    build:
+      context: .
+    container_name: backand-golang
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - postgres-dev
+    networks:
+      - backand
+    ports:
+      - "8080:8080"
+
+  postgres-dev:
+    image: postgres:12-alpine
+    container_name: postgres-dev
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      POSTGRES_DB: ${PHOTOPRISM_DATABASE_NAME}
+      POSTGRES_USER: ${PHOTOPRISM_DATABASE_USER}
+      POSTGRES_PASSWORD: ${PHOTOPRISM_DATABASE_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+    - ./token_refresh.sql:/docker-entrypoint-initdb.d/token_refresh.sql
+    networks:
+      - backand
+
+networks:
+  backand:
+    driver: bridge
+    enable_ipv6: false

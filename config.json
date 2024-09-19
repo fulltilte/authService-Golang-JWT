@@ -1,0 +1,6 @@
+{
+    "db_user": "user",
+    "db_password": "123",
+    "db_name": "authService",
+    "db_sslmode": "disable"
+  }

@@ -13,9 +13,6 @@
 
 ### 1. Клонирование репозитория
 
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
-
 ### 2. Изменение файлов .env и config.json
 
 ### 3. Запуск Docker Compose

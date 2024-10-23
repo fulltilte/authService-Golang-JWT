@@ -1,19 +1,24 @@
 package main
 
 import (
-	"auth-service/internal/auth"
 	"log"
 	"net/http"
 
+	"auth-service/internal/auth"
+	"auth-service/internal/database"
+
 	"github.com/go-chi/chi/v5"
-	_ "github.com/lib/pq"
 )
 
 func main() {
-	router := chi.NewRouter()
-	router.Post("/auth/getTokens/{userID}", auth.GenerateTokenPair)
-	router.Post("/auth/refreshTokens/{user_id}/{refresh_token}", auth.RefreshTokenHandler)
+	database.InitDB()
 
-	log.Println("Сервер запущен...")
+	router := chi.NewRouter()
+	router.Post("/auth/register", auth.Register)
+	router.Post("/auth/getTokens", auth.GenerateTokenPair)
+	router.Post("/auth/refreshTokens", auth.RefreshTokenHandler)
+	router.Post("/auth/logoutOtherSessions", auth.LogoutOtherSessions)
+
+	log.Println("Сервер запущен на порту 8080...")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

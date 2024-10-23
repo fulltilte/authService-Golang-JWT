@@ -26,7 +26,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-    - ./token_refresh.sql:/docker-entrypoint-initdb.d/token_refresh.sql
+    - ./tables.sql:/docker-entrypoint-initdb.d/tables.sql
     networks:
       - backand
 
